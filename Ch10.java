@@ -3,6 +3,8 @@ package test_java;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.time.DayOfWeek;
+import java.time.Month;
 
 public class Ch10 {
     Scanner scanner;
@@ -65,6 +67,17 @@ public class Ch10 {
         testEnumList(listOfEnum);
     }
 
+    public void testEnumFour() {
+        for (DayOfWeek day : DayOfWeek.values()) {
+            System.out.println(day);
+        }
+
+        for (Month month : Month.values()) {
+            System.out.println(month);
+        }
+    }
+
+
     public void testArrList() {
         String outStr;
         ArrayList<String> listOfEnum = new ArrayList<>(
@@ -79,6 +92,8 @@ public class Ch10 {
         ArrayList<Character> listOfChar = new ArrayList<>(
                 Arrays.asList('a', 'b', 'c'));
 
+        ArrayList<String> listOfString = new ArrayList<>(
+                Arrays.asList("string1", "string2", "string3"));
         // cannot remove item with String type
         /*
          * System.out.println("testArrList");
@@ -139,40 +154,148 @@ public class Ch10 {
             System.out.println(charX);
         }
 
+        Character aChar = listOfChar.get(0);
+        listOfChar.remove(aChar);
+
+        printListOfChar(listOfChar);
+        listOfChar.add('e');
+
+        printListOfChar(listOfChar);
+
+        /* */
+        printListOfString(listOfString);
+        String aStr = listOfString.get(0);
+        listOfString.remove(aStr);
+        printListOfString(listOfString);
+
     }
-    
+
+    private void printListOfChar(ArrayList<Character> charList) {
+        System.out.println("print list of chars:");
+        for (Character charX : charList) {
+            System.out.println(charX);
+        }
+
+    }
+
+    private void printListOfString(ArrayList<String> stringList) {
+        System.out.println("print list of strings:");
+        for (String strX : stringList) {
+            System.out.println(strX);
+        }
+
+    }
+
     public void testString() {
+        // test StringBuilder
+        StringBuilder strA = new StringBuilder("Give me a new string");
+        strA.insert(5, "her and ");
+        System.out.println(strA.toString());
+
         StringBuilder strX = new StringBuilder();
         strX.append("A very long string to print. a short string to type.");
         String strY = strX.toString();
 
-        //test substring()
+        // test substring()
         String msg = strY.substring(0, 11);
         System.out.println(msg);
 
         int idx = strY.indexOf("long");
-        msg = strY.substring(idx, strY.length());  //substring does not include endIdx position
+        msg = strY.substring(idx, strY.length()); // substring does not include endIdx position
         System.out.println(msg);
 
         idx = strY.indexOf("print");
         msg = strY.substring(idx); // substring does not include endIdx position
         System.out.println(msg);
- 
+
         // test indexOf() usages
         idx = strY.indexOf("string");
-        msg = strY.substring(idx); 
+        msg = strY.substring(idx);
         System.out.println(msg);
 
-        int startIdx = idx; 
-        idx = strY.indexOf("string",  startIdx+6);
-        msg = strY.substring(idx); 
+        int startIdx = idx;
+        idx = strY.indexOf("string", startIdx + 6);
+        msg = strY.substring(idx);
         System.out.println(msg);
 
         idx = strY.indexOf("strength");
         if (idx == -1) {
             System.out.println("cannot find strength");
-        } 
+        }
+
+        String fmtStr = String.format("Format a string %+,10.2f, %+,.3f. reverse %2$.2f, %1$(10.3f, %<0,+12.3f",
+                -2000.434, 3000.535);
+        System.out.println(fmtStr);
+    }
+
+    
+
+    public void testException() throws  IllegalArgumentException {
+        
+         try {
+         throwBadException();
+         } 
+          
+         catch (IllegalArgumentException e) {
+         String msg = e.getMessage();
+         
+         System.out.println(String.
+         format("IllegalArgumentException detected, error msg: %s", msg));
+         }
+        
+        
+
+         /*
+          * 
+          * try {
+          * double aDbl = throwAnotherBadException(0);
+          * System.out.println("print something");
+          * }
+          * 
+          * catch (ArithmeticException e) {
+          * System.out.println("catching exception fro throwAnotherBadException()");
+          * // String msg = e.getMessage();
+          * 
+          * System.out.println(String.format("bad division detected, error msg: " + e));
+          * 
+          * }
+          */
+    }
+
+    private void throwBadException() {
+
+        throw new IllegalArgumentException(String.format("Menu option id %d is not an available option.", 4));
 
     }
 
+    /**
+     * It does not throw unchecked exception for me.
+     * @param arg
+     * @return
+     */
+    private double throwAnotherBadException(int arg) {
+        System.out.println("in throwAnotherBadException()");
+        double num = (float) 1 / arg;
+        return num;
+    }
+
+    public void testToyObj() {
+        Toy toy1 = new Toy(1, "bear");
+        Toy toy2 = new Toy(2, "Pig");
+        Toy toy3 = new Toy(2, "Pig");
+
+        if (toy1.equals(toy2)) {
+            System.out.println("toy 1 == toy 2");
+        } else {
+            System.out.println("toy 1 not equal toy 2");
+        }
+
+        if (toy3.equals(toy2)) {
+            System.out.println("toy 3 == toy 2");
+        } else {
+            System.out.println("toy 3 not equal toy 2");
+        }
+    }
+
 }
+

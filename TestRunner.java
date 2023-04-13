@@ -4,6 +4,7 @@ import java.io.InputStreamReader;
 import java.nio.charset.Charset;
 import java.util.Scanner;
 
+
 public class TestRunner {
 
     public static void main(String[] args){
@@ -20,9 +21,15 @@ public class TestRunner {
 
         ch10.testEnumThree();
 
+        ch10.testEnumFour();
+
         ch10.testArrList();
 
+        ch10.testException();
+
         ch10.testString();
+
+        ch10.testToyObj();
 
     }
 }
