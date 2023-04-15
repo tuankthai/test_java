@@ -245,21 +245,7 @@ public class Ch10 {
             System.out.println(String.format("IllegalArgumentException detected, error msg: %s", msg));
         }
 
-        /*
-         * 
-         * try {
-         * double aDbl = throwAnotherBadException(0);
-         * System.out.println("print something");
-         * }
-         * 
-         * catch (ArithmeticException e) {
-         * System.out.println("catching exception fro throwAnotherBadException()");
-         * // String msg = e.getMessage();
-         * 
-         * System.out.println(String.format("bad division detected, error msg: " + e));
-         * 
-         * }
-         */
+        
     }
 
     private void throwBadException() {
@@ -342,15 +328,19 @@ public class Ch10 {
     }
 
     public void testScannerX() {
+        boolean boo;
+        String msg;
+        int nbr;
+        double dbl;
 
         System.out.println("Start ScannerX:");
 
         System.out.println("Enter String:");
-        String msg = scannerX.nextLine();
+        msg = scannerX.nextLine();
         printMsg(msg);
 
         System.out.println("Enter integer:");
-        int nbr = scannerX.nextInt();
+        nbr = scannerX.nextInt();
         printMsg(nbr);
 
         System.out.println("Enter integer:");
@@ -360,17 +350,30 @@ public class Ch10 {
             printMsg(nbr);
         } else {
 
-        }
+            if (scannerX.hasNextDouble()) {
+                dbl = scannerX.nextDouble();
+                printMsg("a double " + dbl);
+            } else {
+                if (scannerX.hasNextBoolean()) {
+                    boo = scannerX.nextBoolean();
+                    printMsg("a boolean " + boo);
+                } else {
 
-        if (scannerX.hasNextLine()) {
-            msg = scannerX.nextLine();
-            printMsg(msg);
-        }
-
-        boolean boo;
-        if (scannerX.hasNextBoolean()) {
-            boo = scannerX.nextBoolean();
-            printMsg(boo);
+                    if (scannerX.hasNextLine()) {
+                    
+                        scannerX.nextLine(); // skip end of line
+                        if (scannerX.hasNextLine()) {
+                            msg = scannerX.nextLine();
+                            printMsg("a string " + msg);
+                        } else {
+                            System.out.println("Hey, Don't know what it is");
+                        }
+                        
+                    } else {
+                        System.out.println("Don't know what it is");
+                    }
+                }
+            }
         }
 
         scannerX.close();
