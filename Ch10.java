@@ -1,6 +1,10 @@
 package test_java;
 
 import java.util.Scanner;
+
+// import javax.net.ssl.TrustManagerFactory;
+// import javax.sound.sampled.BooleanControl;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.time.DayOfWeek;
@@ -9,11 +13,13 @@ import java.time.Month;
 public class Ch10 {
     Scanner scanner;
     Ch10Enum ch10Enum;
+    Scanner scannerX;
     // init String array with array literals
     String[] arrOfEnum = { "NORTH", "EAST", "SOUTH", "WEST" };
 
-    public Ch10(Scanner scanner) {
+    public Ch10(Scanner scanner, Scanner scannerX) {
         this.scanner = scanner;
+        this.scannerX = scannerX;
     }
 
     public void testEnum(String[] arrX) {
@@ -76,7 +82,6 @@ public class Ch10 {
             System.out.println(month);
         }
     }
-
 
     public void testArrList() {
         String outStr;
@@ -228,38 +233,33 @@ public class Ch10 {
         System.out.println(fmtStr);
     }
 
-    
+    public void testException() throws IllegalArgumentException {
 
-    public void testException() throws  IllegalArgumentException {
-        
-         try {
-         throwBadException();
-         } 
-          
-         catch (IllegalArgumentException e) {
-         String msg = e.getMessage();
-         
-         System.out.println(String.
-         format("IllegalArgumentException detected, error msg: %s", msg));
-         }
-        
-        
+        try {
+            throwBadException();
+        }
 
-         /*
-          * 
-          * try {
-          * double aDbl = throwAnotherBadException(0);
-          * System.out.println("print something");
-          * }
-          * 
-          * catch (ArithmeticException e) {
-          * System.out.println("catching exception fro throwAnotherBadException()");
-          * // String msg = e.getMessage();
-          * 
-          * System.out.println(String.format("bad division detected, error msg: " + e));
-          * 
-          * }
-          */
+        catch (IllegalArgumentException e) {
+            String msg = e.getMessage();
+
+            System.out.println(String.format("IllegalArgumentException detected, error msg: %s", msg));
+        }
+
+        /*
+         * 
+         * try {
+         * double aDbl = throwAnotherBadException(0);
+         * System.out.println("print something");
+         * }
+         * 
+         * catch (ArithmeticException e) {
+         * System.out.println("catching exception fro throwAnotherBadException()");
+         * // String msg = e.getMessage();
+         * 
+         * System.out.println(String.format("bad division detected, error msg: " + e));
+         * 
+         * }
+         */
     }
 
     private void throwBadException() {
@@ -270,6 +270,7 @@ public class Ch10 {
 
     /**
      * It does not throw unchecked exception for me.
+     * 
      * @param arg
      * @return
      */
@@ -297,5 +298,83 @@ public class Ch10 {
         }
     }
 
-}
+    private void printMsg(String msg) {
+        System.out.println("You input: " + msg);
+    }
 
+    private void printMsg(int nbr) {
+        System.out.println("You input: " + nbr);
+    }
+
+    private void printMsg(boolean boo) {
+        System.out.println("You input: " + boo);
+    }
+
+    private void printMsg(double dbl) {
+        System.out.println("You input: " + dbl);
+    }
+
+    public void testScanner() {
+        System.out.println("Enter String:");
+        String msg = scanner.nextLine();
+        printMsg(msg);
+
+        System.out.println("Enter integer:");
+        int nbr = scanner.nextInt();
+        printMsg(nbr);
+
+        System.out.println("Enter boolean:");
+        boolean boo = scanner.nextBoolean();
+        printMsg(boo);
+
+        System.out.println("Enter double:");
+        double dbl = scanner.nextDouble();
+        printMsg(dbl);
+
+        System.out.println("Enter a word:");
+        String word = scanner.next();
+        printMsg(word);
+
+        word = scanner.next();
+        printMsg(word);
+
+        scanner.close();
+    }
+
+    public void testScannerX() {
+
+        System.out.println("Start ScannerX:");
+
+        System.out.println("Enter String:");
+        String msg = scannerX.nextLine();
+        printMsg(msg);
+
+        System.out.println("Enter integer:");
+        int nbr = scannerX.nextInt();
+        printMsg(nbr);
+
+        System.out.println("Enter integer:");
+
+        if (scannerX.hasNextInt()) {
+            nbr = scannerX.nextInt();
+            printMsg(nbr);
+        } else {
+
+        }
+
+        if (scannerX.hasNextLine()) {
+            msg = scannerX.nextLine();
+            printMsg(msg);
+        }
+
+        boolean boo;
+        if (scannerX.hasNextBoolean()) {
+            boo = scannerX.nextBoolean();
+            printMsg(boo);
+        }
+
+        scannerX.close();
+
+    }
+
+}

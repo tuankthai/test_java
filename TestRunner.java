@@ -13,7 +13,9 @@ public class TestRunner {
         Scanner scanner = new Scanner(new InputStreamReader(System.in,
                 Charset.forName("UTF-8")));
 
-        Ch10 ch10 = new Ch10(scanner);
+        Scanner scannerX = new Scanner(System.in);
+
+        Ch10 ch10 = new Ch10(scanner, scannerX);
 
         ch10.testEnumOne();
         
@@ -30,6 +32,10 @@ public class TestRunner {
         ch10.testString();
 
         ch10.testToyObj();
+
+        // ch10.testScanner();
+
+        ch10.testScannerX();
 
     }
 }
