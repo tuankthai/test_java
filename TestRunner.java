@@ -30,7 +30,7 @@ public class TestRunner {
 
         // ch10.testString();
 
-        // ch10.testToyObj();
+        ch10.testToyObj();
 
         // ch10.testScanner();
 
