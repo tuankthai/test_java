@@ -26,7 +26,7 @@ public class TestRunner {
 
         // ch10.testArrList();
 
-        ch10.testException();
+        // ch10.testException();
 
         // ch10.testString();
 
